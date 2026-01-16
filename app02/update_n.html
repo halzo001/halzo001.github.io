@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アプリ更新情報</title>
+
+  <style>
+    ul {
+      padding-left: 15px;
+    }
+
+    li {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<font size="-1">
+  アプリをインストール・更新いただき、ありがとうございます。<br><br>
+
+  <div data-app="1.10.0">
+  いただいたご意見を受けまして、バージョン（1.10.0）では、主に以下2点の更新を行いました。<br><br>
+  
+  <ul>
+    <li><b>複数の問題データの一括共有機能の追加</b><br>
+      <ul>
+        <li>従来は問題単体でのみ可能だった共有機能について、複数の問題をまとめてアーカイブ（zip化）し、他のデバイスに共有できるようにしました。<br><br>
+          機種変更時のバックアップとしてもご利用いただけます。<br><br>
+          <ul>
+           <li>一覧画面で、各問題カード右側のメニューから「選択」を選ぶと、チェックボックスが表示されます。<br><br>
+            共有したい問題を選択後、画面上部の共有ボタンから、共有用zipファイルを作成できます。</li> 
+            <ul>
+              <li>zipファイル作成時には、デバイス内に十分な空き容量を確保してください。<br><br>
+                選択する問題数を減らすことで容量を抑えることも可能です。</li>
+            </ul>
+           <li>作成したzipファイルは、クラウドストレージ等に保存し、別デバイスの本アプリで「共有されたファイル」から読み込んでください。
+            <ul>
+              <li>複数共有用zipファイルは、単体共有用とはファイル名が異なります。<br><br>
+              （例：複数共有用「MultiAnki_日時14桁.zip」／単体共有用「AnkiMarker_日時14桁.zip」）</li>
+              <li>ファイル名は変更しないでください。</li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><b>複数の問題画像の一括保存機能の追加</b><br>
+      <ul>
+        <li>選択した複数の問題の画像を、まとめてデバイス内に保存できるようにしました。
+          <ul>
+           <li>一覧画面で各問題カード右側のメニューから「選択」を選び、保存したい問題を選択後、画面上部の保存ボタンから実行できます。
+           </li> 
+          </ul>
+      </ul>
+    </li>
+  </ul> 
+  <br>
+  </div>
+
+</font>
+
+<script>
+  function getAppVersion() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('appVer');
+  }
+
+  (function () {
+    const appVer = getAppVersion();
+    if (!appVer) return;
+
+    document.querySelectorAll('[data-app]').forEach(el => {
+      const targets = el
+        .getAttribute('data-app')
+        .split(',')
+        .map(v => v.trim());
+
+      if (!targets.includes(appVer)) {
+        el.style.display = 'none';
+      }
+    });
+  })();
+</script>
+
+
+</body>
+</html>
