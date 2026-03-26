@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アプリ更新情報</title>
+
+  <style>
+    ul {
+      padding-left: 15px;
+    }
+
+    li {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<font size="-1">
+  アプリをインストール・更新いただき、ありがとうございます。<br><br>
+
+  <div data-app="1.8.1">
+  今回のバージョン（1.8.1）では、主に以下3点の更新を行いました。<br><br>
+    
+  <b>①問題文の文字サイズの初期設定を追加：</b>
+  <ul>
+    <li>頂いたご意見を受けまして、アプリ起動時の問題文の文字サイズを初期設定できるようにしました。
+      <ul>
+        <li>設定画面の「文字サイズ変更(アプリ起動時)」から設定できます。</li> 
+        <li>問題画面内で文字サイズを変更した場合は、アプリを閉じるまで、変更後のサイズが維持されます。</li> 
+      </ul>
+  </ul>
+  <br>
+
+  <b>②テキスト修正の入力欄の拡大：</b>
+  <ul>
+    <li>頂いたご意見を受けまして、テキスト修正ウィンドウを拡張しました。
+      <ul>
+        <li>入力欄の拡張により、文字数の多いテキストでも入力しやすくしました。</li> 
+        <li>修正ウィンドウを上下に移動可能にしたため、適宜、元の問題文を確認しながら入力できます。</li> 
+      </ul>
+  </ul>
+  <br>
+
+  <b>③横向き表示対応（現状Androidのみ）：</b>
+  <ul>
+    <li>頂いたご意見を受けまして、端末を横向きにした時の横長表示を可能にしました。
+      <ul>
+        <li>設定画面の「横向き表示許可」をONにすることで、横向き表示対応になります。</li>
+        <ul>
+          <li>現状はAndroidのみ対応しています。</li>
+          <li>タブレット等の画面サイズの大きい端末でのご利用を推奨いたします（スマートフォンだとテキスト等の入力がしづらくなる点にご留意ください）。</li>
+        </ul>
+      </ul>
+  </ul>
+  <br>
+
+</div>
+
+</font>
+
+<script>
+  function getAppVersion() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('appVer');
+  }
+
+  (function () {
+    const appVer = getAppVersion();
+    if (!appVer) return;
+
+    document.querySelectorAll('[data-app]').forEach(el => {
+      const targets = el
+        .getAttribute('data-app')
+        .split(',')
+        .map(v => v.trim());
+
+      if (!targets.includes(appVer)) {
+        el.style.display = 'none';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
