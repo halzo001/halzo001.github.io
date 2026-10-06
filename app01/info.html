@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ(更新情報等)</title>
+
+  <style>
+    ul {
+      padding-left: 15px;
+    }
+
+    li {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<font size="-1">
+
+  <b>＜お知らせ(更新情報等)＞</b><br>
+  <br>
+
+  <div data-app="1.6.0">
+  <b>[ver1.6.0リリース]</b>
+    <ul>
+    <li><b>いただいたご意見を受けまして、印刷機能を追加しました。</b><br>
+      <ul>
+        <li>メモ編集画面のメニューボタン→「印刷」から、OS標準の印刷機能を用いて印刷が可能です。</li>
+      </ul>
+    </li>
+    <li><b>他のメモアプリにデータを移行できるよう、複数の形式で書き出す機能を追加しました。</b><br>
+      <ul>
+        <li>メモ一覧画面右上のメニューボタン→「他アプリ用に書き出す」から3つの形式(「.md」「.enex」「.csv」)を選択して出力できます。</li>
+      </ul>
+    </li>
+  </ul> 
+  <br>
+  </div>
+</font>
+
+<script>
+  function getAppVersion() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('appVer');
+  }
+
+  (function () {
+    const appVer = getAppVersion();
+    if (!appVer) return;
+
+    document.querySelectorAll('[data-app]').forEach(el => {
+      const targets = el
+        .getAttribute('data-app')
+        .split(',')
+        .map(v => v.trim());
+
+      if (!targets.includes(appVer)) {
+        el.style.display = 'none';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
